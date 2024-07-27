@@ -1,18 +1,20 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+// 报告所有 PHP 错误
 error_reporting(E_ALL);
+
 // 加载 .env 文件中的配置
 require 'vendor/autoload.php';
 
+// 指定 .env 文件的路径（使用相对路径）
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-$merchantID = $_ENV['MERCHANT_ID'];
-$hashKey = $_ENV['HASH_KEY'];
-$hashIV = $_ENV['HASH_IV'];
-$apiUrl = $_ENV['API_URL'];
-$version = $_ENV['VERSION'];
+// 从 .env 文件中获取配置
+$merchantId = getenv('MERCHANT_ID');
+$hashKey = getenv('HASH_KEY');
+$hashIv = getenv('HASH_IV');
+$apiUrl = getenv('API_URL');
+$version = getenv('VERSION');
 
 function encryptData($data, $key, $iv) {
     return bin2hex(openssl_encrypt($data, 'AES-256-CBC', $key, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING, $iv));
