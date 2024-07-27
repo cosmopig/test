@@ -1,6 +1,7 @@
 <?php
 // 报告所有 PHP 错误
 error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // 加载 .env 文件中的配置
 require 'vendor/autoload.php';
